@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.decorators import permission_classes, authentication_classes
+#from rest_framework.permissions import IsAuthenticated
+#from rest_framework.authentication import JSONWebTokenAuthentication
 from .serializers import TaskSerializer
 
 from .models import Task
@@ -55,7 +58,10 @@ def taskUpdate(request, pk):
     return Response(serializer.data)
 
 
+
 @api_view(['DELETE'])
+#@permission_classes((IsAuthenticated, ))
+#@authentication_classes([JSONWebTokenAuthentication, ])
 def taskDelete(request, pk):
     task = Task.objects.get(id=pk)
     task.delete()
