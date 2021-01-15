@@ -8,6 +8,10 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+{#    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>#}
+{#    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
+
 	<style type="text/css">
 		body{
 		  background: rgb(54,217,182);
@@ -64,31 +68,62 @@
 		  	color: #686868;
 			}
 
+
+
+        .note {
+            text-align: center;
+            height: 80px;
+            {#background: -webkit-linear-gradient(left, #0072ff, #8811c5);#}
+            color: #fff;
+            font-weight: bold;
+            line-height: 80px;
+        }
+
+        .form-content {
+            padding: 5%;
+            border: 1px solid #ced4da;
+            margin-bottom: 2%;
+        }
+
+        .form-control {
+            border-radius: 1.5rem;
+        }
+
+        .btnSubmit {
+            border: none;
+            border-radius: 1.5rem;
+            padding: 1%;
+            width: 20%;
+            cursor: pointer;
+            background: #0062cc;
+            color: #fff;
+        }
+
         </style>
 
 
 </head>
 <body>
-{#    <script type="text/javascript">#}
-{##}
-{#        function getCookie(name) {#}
-{#		    var cookieValue = null;#}
-{#		    if (document.cookie && document.cookie !== '') {#}
-{#		        var cookies = document.cookie.split(';');#}
-{#		        for (var i = 0; i < cookies.length; i++) {#}
-{#		            var cookie = cookies[i].trim();#}
-{#		            // Does this cookie string begin with the name we want?#}
-{#		            if (cookie.substring(0, name.length + 1) === (name + '=')) {#}
-{#		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));#}
-{#		                break;#}
-{#		            }#}
-{#		        }#}
-{#		    }#}
-{#		    return cookieValue;#}
-{#		}#}
-{#		var csrftoken = getCookie('csrftoken');#}
-{##}
-{#        </script>#}
+    <script type="text/javascript">
+
+        function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getCookie('csrftoken');
+
+        </script>
 
 {% block body %}
 

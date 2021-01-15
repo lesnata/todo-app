@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Task, UserProfile
+from .models import Task
+from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -8,9 +9,24 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserProfileSerialiser(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(read_only=True)
-
-    class Meta:
-        model = UserProfile
+class UserRegistrationSerializer(BaseUserRegistrationSerializer):
+    class Meta(BaseUserRegistrationSerializer.Meta):
         fields = '__all__'
+
+
+
+# class UserProfileSerializer(serializers.ModelSerializer):
+#
+#     password = serializers.CharField(write_only=True)
+#
+#     def create(self, validated_data):
+#         user = UserProfile.objects.create(
+#             username=validated_data['username']
+#         )
+#         user.set_password(validated_data['password'])
+#         user.save()
+#         return user
+#
+#     class Meta:
+#         model = UserProfile
+#         fields = '__all__'
