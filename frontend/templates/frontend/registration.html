@@ -7,51 +7,51 @@
 
 
 
-{#<div class="container-fluid register-form ">#}
-{#            <div class="form ">#}
-{#                <div class="note">#}
-{#                    <div class="row justify-content-end">#}
-{#                        <div class="col-lg-10" ><p></p></div>#}
-{#                        <div class="col-lg-2 text-right" style="margin-right: 20%">#}
-{#                            <button type="button" class="btn btn-primary btn-lg btn-dark"#}
-{#                                    style="border-radius: 1.5rem; padding: auto 20px">Login</button></div>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#                <div class="form-content ">#}
-{#                    <div class="row justify-content-center">#}
-{#                        <div class="col col-lg-6 text-center" style="margin: 0 auto;">#}
-{#                            <p class="note" style="text-align: center;">REGISTER IN TODO APP</p>#}
-{#                            <form id="registration" action="http://127.0.0.1:8000/auth/users/" method="POST">#}
-{#                                {% csrf_token %}#}
-{#                            <form id="registration" action="{% url 'auth/users/' %}" method="post">#}
-{#                                <div class="form-group">#}
-{#                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="" required/>#}
-{#                                </div>#}
-{#                                <div class="form-group">#}
-{#                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required/>#}
-{#                                </div>#}
-{#                                <div class="form-group">#}
-{#                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required/>#}
-{#                                </div>#}
-{#                                <button type="button" class="btnSubmit" style="margin: 0 auto;">Submit</button>#}
-{#                            </form>#}
-{#                        </div>#}
-{#                    </div>#}
-{##}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+<div class="container-fluid register-form ">
+            <div class="form ">
+                <div class="note">
+                    <div class="row justify-content-end">
+                        <div class="col-lg-10" ><p></p></div>
+                        <div class="col-lg-2 text-right" style="margin-right: 20%">
+                            <button type="button" class="btn btn-primary btn-lg btn-dark"
+                                    style="border-radius: 1.5rem; padding: auto 20px">Login</button></div>
+                    </div>
+                </div>
 
-<form class="form-horizontal" action="{% url 'authorization' %}" method="post" novalidate>
-    {% csrf_token %}
-    {% render_form serializer %}
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Sign in</button>
+                <div class="form-content ">
+                    <div class="row justify-content-center">
+                        <div class="col col-lg-6 text-center" style="margin: 0 auto;">
+                            <p class="note" style="text-align: center;">REGISTER IN TODO APP</p>
+                            <form id="registration" action="http://127.0.0.1:8000/auth/users/" method="POST">
+                                {% csrf_token %}
+                            <form id="registration" action="{% url 'authorization' %}" method="post">
+                                <div class="form-group">
+                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required/>
+                                </div>
+                                <button type="button" class="btnSubmit" style="margin: 0 auto;">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-    </div>
-</form>
+
+{#<form class="form-horizontal" action="{% url 'authorization' %}" method="post" novalidate>#}
+{#    {% csrf_token %}#}
+{#    {% render_form serializer %}#}
+{#    <div class="form-group">#}
+{#        <div class="col-sm-offset-2 col-sm-10">#}
+{#            <button type="submit" class="btn btn-default">Sign in</button>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}
 
 
 {##}
