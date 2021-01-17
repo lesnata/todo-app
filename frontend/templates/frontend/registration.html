@@ -22,20 +22,31 @@
                     <div class="row justify-content-center">
                         <div class="col col-lg-6 text-center" style="margin: 0 auto;">
                             <p class="note" style="text-align: center;">REGISTER IN TODO APP</p>
-                            <form id="registration" action="http://127.0.0.1:8000/auth/users/" method="POST">
+
+                            <form method="POST" action="">
                                 {% csrf_token %}
-                            <form id="registration" action="{% url 'authorization' %}" method="post">
-                                <div class="form-group">
-                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="" required/>
-                                </div>
-                                <div class="form-group">
-                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required/>
-                                </div>
-                                <div class="form-group">
-                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required/>
-                                </div>
-                                <button type="button" class="btnSubmit" style="margin: 0 auto;">Submit</button>
+                                {{ form.as_p }}
+                                <input type="submit" name="Create User">
                             </form>
+
+
+{#                            <form id="registration" action="http://127.0.0.1:8000/auth/users/" method="POST">#}
+{#                                {% csrf_token %}#}
+{#                            <form id="registration" action="{% url 'authorization' %}" method="post">#}
+{#                                <div class="form-group">#}
+{#                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" value="" required/>#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required/>#}
+{#                                </div>#}
+{#                                <div class="form-group">#}
+{#                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required/>#}
+{#                                </div>#}
+{#                                <button type="button" class="btnSubmit" style="margin: 0 auto;">Submit</button>#}
+{#                            </form>#}
+
+
+
                         </div>
                     </div>
 
