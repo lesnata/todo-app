@@ -1,14 +1,25 @@
-from django.shortcuts import render
-from django.http import JsonResponse
+#from django.shortcuts import render
+#from django.http import JsonResponse
+#from rest_framework import permissions
 from rest_framework.decorators import api_view
+#from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from rest_framework.decorators import permission_classes, authentication_classes
+#from rest_framework.decorators import permission_classes, authentication_classes
 #from rest_framework.permissions import IsAuthenticated
 #from rest_framework.authentication import JSONWebTokenAuthentication
 from .serializers import TaskSerializer
-
+from django.contrib.auth.models import User
 from .models import Task
 # Create your views here.
+
+#
+# class UserRegistration(CreateAPIView):
+#     model = User
+#     permission_classes = [
+#         permissions.AllowAny
+#     ]
+#     serializer_class = UserRegistrationSerializer
+#
 
 
 @api_view(['GET'])
@@ -18,15 +29,18 @@ def apiOverview(request):
         'Detail View':'/task-detail/<str:pk>',
         'Create':'/task-create/',
         'Update':'/task-update/<str:pk>/',
-        'Delete':'/task=delete/<str:pk>',
+        'Delete':'/task-delete/<str:pk>',
     }
     return Response(api_urls)
 
 
 @api_view(['GET'])
 def taskList(request):
-    tasks = Task.objects.all().order_by('-id')
+    user = request.user
+    tasks = Task.objects.filter(id=user.id)
     serializer = TaskSerializer(tasks, many=True)
+    # tasks = Task.objects.all().order_by('-id')
+    # serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
 
 
@@ -39,6 +53,7 @@ def taskDetail(request, pk):
 
 @api_view(['POST'])
 def taskCreate(request):
+    # user = request.user
     serializer = TaskSerializer(data=request.data)
 
     if serializer.is_valid():
