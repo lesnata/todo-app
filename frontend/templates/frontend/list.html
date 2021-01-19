@@ -70,8 +70,15 @@
         var list_snapshot = []
 
 
-        buildList()
+        const token = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('Token'))
+            ?.split('=')[1];
 
+        console.log('Document get Token: ', token)
+
+
+        buildList()
 
 
 
@@ -79,11 +86,18 @@
             var wrapper = document.getElementById('list-wrapper')
             //wrapper.innerHTML = ''
 
+            var url = 'http://127.0.0.1:8000/api/tasks/'
 
+            {#fetch(url)#}
 
-            var url = 'http://127.0.0.1:8000/api/task-list/'
+             fetch(url, {
+                method: 'GET',
+                headers:{
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                    'Authorization': 'Token ' + token,
+                }})
 
-            fetch(url)
                 .then((resp) => resp.json())
                 .then(function (data) {
                     console.log('Data: ', data)
@@ -163,29 +177,35 @@
         }
 
         var form = document.getElementById('form-wrapper')
+
         form.addEventListener('submit', function(e){
             e.preventDefault()
-            console.log('Form submitted')
-            var url = 'http://127.0.0.1:8000/api/task-create/'
+
+            var url = 'http://127.0.0.1:8000/api/tasks/'
             if (activeItem != null){
-                var url = `http://127.0.0.1:8000/api/task-update/${activeItem.id}`
+                var url = `http://127.0.0.1:8000/api/tasks/${activeItem.id}`
                 activeItem = null
             }
 
-
-
-            var title = document.getElementById('title').value
+            const title = document.getElementById('title').value.trim()
             fetch(url, {
                 method: 'POST',
                 headers:{
                     'Content-type': 'application/json',
                     'X-CSRFToken': csrftoken,
+                    'Authorization': 'Token ' + token,
                 },
                 body: JSON.stringify({'title':title}),
             }).then(function(response){
+                console.log('Form submitted')
+
                 buildList()
                 document.getElementById('form').reset()
             })
+                .catch(error => {
+                    console.log("Error happened: " + error);
+                })
+
 
         })
 
@@ -198,16 +218,12 @@
 
         function deleteItem(item){
             console.log('Delete clicked')
-            fetch(`http://127.0.0.1:8000/api/task-delete/${item.id}`, {
+            fetch(`http://127.0.0.1:8000/api/tasks/${item.id}`, {
                 method:'DELETE',
                 headers:{
                     'Content-type': 'application/json',
-
-
-                    {#TESTING X-CSRF-Token vs X-CSRFToken #}
-
-
                     'X-CSRFToken': csrftoken,
+                    'Authorization': 'Token ' + token,
                 }
             }).then((response) => {
                 buildList()
@@ -218,11 +234,12 @@
             console.log('Strike Clicked')
 
             item.completed = !item.completed
-            fetch(`http://127.0.0.1:8000/api/task-update/${item.id}`, {
+            fetch(`http://127.0.0.1:8000/api/tasks/${item.id}`, {
                 method:'POST',
                 headers:{
                     'Content-type': 'application/json',
                     'X-CSRFToken': csrftoken,
+                    'Authorization': 'Token ' + token,
                 },
                 body:JSON.stringify({
                     'title':item.title,

@@ -4,16 +4,20 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
+from rest_framework.authtoken.models import Token
 # Create your views here.
 
 
 def list(request):
-    return render(request, 'frontend/list.html')
+    # TODO Refactor as get only
+    token, created = Token.objects.get_or_create(user=request.user)
+    response = render(request, 'frontend/list.html')
+    response.set_cookie(key='Token', value=token)
+    return response
 
 
 def registration(request):
     form = CreateUserForm()
-
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
