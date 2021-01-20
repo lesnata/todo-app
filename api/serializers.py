@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Task
-from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
+from django.contrib.auth.models import User
+# from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -9,24 +10,28 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserRegistrationSerializer(BaseUserRegistrationSerializer):
-    class Meta(BaseUserRegistrationSerializer.Meta):
+class RegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
         fields = '__all__'
 
+    #  IF REWRITING save() method
+    #
+    # def save(self):
+    #     user = User(email=self.validated_data["email"],
+    #                 username=self.validated_data["username"],
+    #                 password=self.validated_data["password"],
+    #                 )
+    #     # password = self.validated_data["password"],
+    #     # password2 = self.validated_data["password2"],
+    #     # if password != password2:
+    #     #     raise serializers.ValidationError({"password": "Passwords do not match"})
+    #
+    #     # user.set_password(password)
+    #     user.save()
+    #     return user
 
 
-# class UserProfileSerializer(serializers.ModelSerializer):
-#
-#     password = serializers.CharField(write_only=True)
-#
-#     def create(self, validated_data):
-#         user = UserProfile.objects.create(
-#             username=validated_data['username']
-#         )
-#         user.set_password(validated_data['password'])
-#         user.save()
-#         return user
-#
-#     class Meta:
-#         model = UserProfile
-#         fields = '__all__'
+
+
+

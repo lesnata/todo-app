@@ -5,12 +5,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
 from rest_framework.authtoken.models import Token
+
 # Create your views here.
 
 
 def list(request):
-    # TODO Refactor as get only
-    token, created = Token.objects.get_or_create(user=request.user)
+    if request.user.is_authenticated is False:
+        return redirect('login_page')
+    token = Token.objects.get(user=request.user)
     response = render(request, 'frontend/list.html')
     response.set_cookie(key='Token', value=token)
     return response
@@ -22,8 +24,12 @@ def registration(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            username = request.POST.get("username")
+            password = request.POST.get("password1")
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
             return redirect('list')
-        #TODO refactor error handling, complex password only
 
     context = {'form': form}
     return render(request, 'frontend/registration.html', context)

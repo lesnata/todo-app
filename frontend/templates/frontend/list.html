@@ -65,17 +65,16 @@
 		}
 		var csrftoken = getCookie('csrftoken');
 
-        var activeItem = null
-
-        var list_snapshot = []
-
-
         const token = document.cookie
             .split('; ')
             .find(row => row.startsWith('Token'))
             ?.split('=')[1];
 
         console.log('Document get Token: ', token)
+
+        var activeItem = null
+
+        var list_snapshot = []
 
 
         buildList()
@@ -184,7 +183,27 @@
             var url = 'http://127.0.0.1:8000/api/tasks/'
             if (activeItem != null){
                 var url = `http://127.0.0.1:8000/api/tasks/${activeItem.id}`
-                activeItem = null
+
+                const title = document.getElementById('title').value.trim()
+                fetch(url, {
+                    method: 'PUT',
+                    headers:{
+                        'Content-type': 'application/json',
+                        'X-CSRFToken': csrftoken,
+                        'Authorization': 'Token ' + token,
+                    },
+                    body: JSON.stringify({'title':title}),
+                }).then(function(response){
+                    console.log('Task item is updated')
+
+                    buildList()
+                    document.getElementById('form').reset()
+                })
+                    .catch(error => {
+                        console.log("Error happened: " + error);
+                    })
+
+                    activeItem = null
             }
 
             const title = document.getElementById('title').value.trim()
@@ -235,7 +254,7 @@
 
             item.completed = !item.completed
             fetch(`http://127.0.0.1:8000/api/tasks/${item.id}`, {
-                method:'POST',
+                method:'PUT',
                 headers:{
                     'Content-type': 'application/json',
                     'X-CSRFToken': csrftoken,
