@@ -85,7 +85,7 @@
             var wrapper = document.getElementById('list-wrapper')
             //wrapper.innerHTML = ''
 
-            var url = 'http://127.0.0.1:8000/api/tasks/'
+            var url = 'http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/api/tasks/'
 
             {#fetch(url)#}
 
@@ -180,9 +180,9 @@
         form.addEventListener('submit', function(e){
             e.preventDefault()
 
-            var url = 'http://127.0.0.1:8000/api/tasks/'
+            var url = 'http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/api/tasks/'
             if (activeItem != null){
-                var url = `http://127.0.0.1:8000/api/tasks/${activeItem.id}`
+                var url = `http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/api/tasks/${activeItem.id}`
 
                 const title = document.getElementById('title').value.trim()
                 fetch(url, {
@@ -237,7 +237,7 @@
 
         function deleteItem(item){
             console.log('Delete clicked')
-            fetch(`http://127.0.0.1:8000/api/tasks/${item.id}`, {
+            fetch(`http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/api/tasks/${item.id}`, {
                 method:'DELETE',
                 headers:{
                     'Content-type': 'application/json',
@@ -253,7 +253,7 @@
             console.log('Strike Clicked')
 
             item.completed = !item.completed
-            fetch(`http://127.0.0.1:8000/api/tasks/${item.id}`, {
+            fetch(`http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/api/tasks/${item.id}`, {
                 method:'PUT',
                 headers:{
                     'Content-type': 'application/json',
