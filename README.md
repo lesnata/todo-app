@@ -3,6 +3,9 @@ This repository contains Lesna pet project with ToDo app
 
 ## Live website: DEPLOY IS ON
 Please refer to this link for checking web-site live.
+## IMPORTANT
+Please be gentle, don't rush. RDS free tier takes time to response
+
 
 ## Brief description
 Django RESTful API combined with classic user interface login and to-do list functionality
@@ -31,3 +34,4 @@ Deploy:
 - Bootstrap;
 - PostgreSQL deploy on Amazon RDS;
 - AWS Elastic Beanstalk
+

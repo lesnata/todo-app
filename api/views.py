@@ -10,15 +10,19 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 
-# RESTful Structure for User:
-# /tasks/:              [COLLECTION]
-#     -> GET all tasks
-#     -> POST new task
-#
-# /tasks/<pk>:          [ELEMENT]
-#     -> GET task[id]
-#     -> PUT task[id] update
-#     -> DELETE task[id]
+""" 
+RESTful Structure for User:
+/tasks/:              [COLLECTION]
+    -> GET all tasks
+    -> POST new task
+
+/tasks/<pk>:          [ELEMENT]
+    -> GET task[id]
+    -> PUT task[id] update
+    -> DELETE task[id] 
+    
+"""
+
 
 @api_view(['POST'])
 def registration(request):
