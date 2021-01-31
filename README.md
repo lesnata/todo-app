@@ -1,11 +1,8 @@
 # Natalie's pet project: ToDo app
 This repository contains Lesna pet project with ToDo app
 
-## Live website: DEPLOY IS ON
+## Live website: http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/
 Please refer to this link for checking web-site live.
-## IMPORTANT
-Please be gentle, don't rush. RDS free tier takes time to response
-
 
 ## Brief description
 Django RESTful API combined with classic user interface login and to-do list functionality
@@ -15,6 +12,7 @@ Token authentification is enabled, stored in cookies at the client-side web-app.
 
 Users can create, update, cross and delete their tasks individually without 
 page reloading, thanks to RESTful API URL's triggering.
+Restrictions are implemented via Token functionality, rest_framework.authtoken package
 
 API functionality:
 Initially, URL-mapping was organised poorly, so I've rewritten it according to API best-practices:
@@ -24,10 +22,10 @@ Separate registration URL provides possibility of Token acquiring and further
 request handling.
 
 Deploy:
+Deployed via AWS Elastic Beanstalk
  
 
-
-## Technology stack 
+## STACK 
 - Django;
 - Django RESTful API
 - JavaScript;
