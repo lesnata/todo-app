@@ -25,6 +25,8 @@ RESTful Structure for User:
 
 
 @api_view(['POST'])
+@authentication_classes([])
+@permission_classes([])
 def registration(request):
     serializer = RegistrationSerializer(data=request.data)
     data = {}
