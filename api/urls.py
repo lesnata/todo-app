@@ -8,6 +8,3 @@ urlpatterns = [
     path('tasks/<str:pk>', views.task_element, name="task-element"),
     path('account/register', views.registration, name="registration"),
 ]
-
-
-

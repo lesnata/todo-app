@@ -1,8 +1,18 @@
-# Natalie's pet project: ToDo app
+## Table of contents
+* [General info](#general-info)
+* [Live website](#live-website)
+* [Brief description](#brief-description)
+* [Technologies](#technologies)
+* [Deploy](#deploy)
+* [Style conventions](#style-conventions)
+* [Setup](#setup)
+
+# General Info
 This repository contains Lesna pet project with ToDo app
 
-## Live website: http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/
-Please refer to this link for checking web-site live.
+## Live website
+Please refer to this link for checking web-site live:
+http://todotest-env.eba-6k4zduse.eu-north-1.elasticbeanstalk.com/
 
 ## Brief description
 Django RESTful API combined with classic user interface login and to-do list functionality
@@ -21,15 +31,31 @@ without URL actions naming and based on "collection-element" principle.
 Separate registration URL provides possibility of Token acquiring and further
 request handling.
 
-Deploy:
-Deployed via AWS Elastic Beanstalk
  
+## Technologies 
+* Django==3.1.5
+* djangorestframework==3.12.2
+* Jinja2==2.11.2
+* psycopg2-binary==2.8.6
+* flake8==3.8.4
+* JavaScript;
+* Bootstrap;
 
-## STACK 
-- Django;
-- Django RESTful API
-- JavaScript;
-- Bootstrap;
-- PostgreSQL deploy on Amazon RDS;
+
+## Deploy
+- PostgreSQL at Amazon RDS;
 - AWS Elastic Beanstalk
+
+
+## Setup
+To run this project locally, make the following:
+
+```
+$ git clone https://github.com/lesnata/todo-app.git
+$ cd todo-app
+$ virtualenv venv_todo
+$ source venv_todo/bin/activate
+$ (venv_todo)$ pip install -r requirements.txt
+$ (venv_todo)$ python manage.py runserver
+```
 

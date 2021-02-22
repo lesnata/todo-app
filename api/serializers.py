@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Task
 from django.contrib.auth.models import User
-# from djoser.serializers import UserCreateSerializer as BaseUserRegistrationSerializer
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -25,13 +24,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
     #     # password = self.validated_data["password"],
     #     # password2 = self.validated_data["password2"],
     #     # if password != password2:
-    #     #     raise serializers.ValidationError({"password": "Passwords do not match"})
+    #     #     raise serializers.ValidationError({"password":
+    #     "Passwords do not match"})
     #
     #     # user.set_password(password)
     #     user.save()
     #     return user
-
-
-
-
-

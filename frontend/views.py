@@ -1,6 +1,4 @@
-from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import CreateUserForm
@@ -56,4 +54,3 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login_page')
-

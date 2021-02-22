@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from .serializers import TaskSerializer, RegistrationSerializer
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, \
+    authentication_classes, \
+    permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -10,8 +12,8 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 
-""" 
-RESTful Structure for User:
+"""
+RESTfull Structure for User:
 /tasks/:              [COLLECTION]
     -> GET all tasks
     -> POST new task
@@ -19,8 +21,7 @@ RESTful Structure for User:
 /tasks/<pk>:          [ELEMENT]
     -> GET task[id]
     -> PUT task[id] update
-    -> DELETE task[id] 
-    
+    -> DELETE task[id]
 """
 
 
@@ -28,6 +29,21 @@ RESTful Structure for User:
 @authentication_classes([])
 @permission_classes([])
 def registration(request):
+    """
+        Route for user registration with issuance of Token
+
+        Args:
+        :param request: request parameter from API.
+        Required: username, email, password, password2
+
+        Returns:
+        :return: serialized data of Post object or status code
+        Example: {
+                    "username": "Berlin",
+                    "email": "berlin@gmail.com",
+                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciO....."
+                }
+        """
     serializer = RegistrationSerializer(data=request.data)
     data = {}
     if serializer.is_valid():
@@ -53,6 +69,26 @@ def registration(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def task_collection(request):
+    """
+        Route for multiple Task objects - GET method
+        or POST method for new Task object creation.
+
+        Args:
+        :param request: request parameter from API
+
+        Raises:
+        404 response if user was not found
+
+        Returns:
+        :return: serialized data of Task object or status code
+        Example: [
+                    {
+                        "user": Berlin,
+                        "title": "Finish errands",
+                    }
+                ]
+        """
+
     try:
         user = request.user
     except user in None:
@@ -78,6 +114,20 @@ def task_collection(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def task_element(request, pk):
+    """
+    Route for singular task object with methods GET, PUT, DELETE.
+
+    Args:
+    :param request: request parameter from API
+    :param pk: id of task object. Required
+
+    Raises:
+    404 response if user was not found
+
+    Returns:
+    :return: serialized data of Task object or status code
+    """
+
     try:
         user = request.user
         task = Task.objects.filter(user=user.id).get(pk=pk)
@@ -97,4 +147,3 @@ def task_element(request, pk):
     elif request.method == "DELETE":
         task.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
